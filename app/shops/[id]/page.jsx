@@ -59,11 +59,27 @@ export default function ShopDetail() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="bg-gradient-to-br from-green-700 to-green-500 text-white px-4 py-6 max-w-xl mx-auto">
-        <button onClick={() => router.back()} className="text-sm opacity-80 mb-3 block">← 一覧に戻る</button>
-        <h2 className="text-2xl font-bold mb-1">{shop.name}</h2>
-        <p className="text-sm opacity-90">📍 {shop.area} · {shop.description}</p>
-        {avgRating && <p className="text-sm mt-1">⭐ {avgRating}（{reviews.length}件）</p>}
+      <div className="max-w-xl mx-auto overflow-hidden">
+        {shop.image_url && (
+          <div className="relative">
+            <img src={shop.image_url} alt={shop.name} className="w-full h-52 object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+            <button
+              onClick={() => router.back()}
+              className="absolute top-4 left-4 text-sm text-white bg-black/30 px-3 py-1.5 rounded-full"
+            >
+              ← 戻る
+            </button>
+          </div>
+        )}
+        <div className={`bg-gradient-to-br from-green-700 to-green-500 text-white px-4 py-5 ${!shop.image_url ? '' : ''}`}>
+          {!shop.image_url && (
+            <button onClick={() => router.back()} className="text-sm opacity-80 mb-3 block">← 一覧に戻る</button>
+          )}
+          <h2 className="text-2xl font-bold mb-1">{shop.name}</h2>
+          <p className="text-sm opacity-90">📍 {shop.area} · {shop.description}</p>
+          {avgRating && <p className="text-sm mt-1">⭐ {avgRating}（{reviews.length}件）</p>}
+        </div>
       </div>
 
       <div className="max-w-xl mx-auto">
