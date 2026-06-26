@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
@@ -40,14 +40,16 @@ export default function Home() {
   })
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <header className="bg-green-700 text-white px-4 py-4">
-        <div className="max-w-xl mx-auto flex justify-between items-center">
+    <div className="min-h-screen bg-rose-50">
+      <header className="bg-gradient-to-r from-rose-500 to-pink-400 text-white px-4 py-5 relative overflow-hidden">
+        <div className="absolute right-3 top-1/2 -translate-y-1/2 text-white/10 text-9xl select-none pointer-events-none leading-none">🐱</div>
+        <div className="absolute right-24 bottom-0 text-white/5 text-6xl select-none pointer-events-none leading-none">🐾</div>
+        <div className="max-w-xl mx-auto flex justify-between items-center relative">
           <div>
-            <h1 className="text-xl font-bold">🍽 しがランチ</h1>
+            <h1 className="text-xl font-bold tracking-wide">🍽 しがランチ</h1>
             <p className="text-sm opacity-85">滋賀のカフェ・レストランを1か所で</p>
           </div>
-          <Link href="/favorites" className="text-sm bg-white/20 px-3 py-1.5 rounded-full">
+          <Link href="/favorites" className="text-sm bg-white/25 px-3 py-1.5 rounded-full backdrop-blur-sm">
             ♡ お気に入り
           </Link>
         </div>
@@ -59,7 +61,7 @@ export default function Home() {
           placeholder="店名・エリアで検索（例: 大津、カフェ）"
           value={search}
           onChange={e => setSearch(e.target.value)}
-          className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm bg-white focus:outline-none focus:ring-2 focus:ring-green-400"
+          className="w-full px-4 py-3 border border-rose-100 rounded-xl text-sm bg-white focus:outline-none focus:ring-2 focus:ring-rose-300 shadow-sm"
         />
         <div className="flex gap-2 flex-wrap mt-3">
           {AREAS.map(a => (
@@ -68,8 +70,8 @@ export default function Home() {
               onClick={() => setArea(a)}
               className={`text-sm px-3 py-1 rounded-full border transition ${
                 area === a
-                  ? 'bg-green-700 text-white border-green-700'
-                  : 'bg-green-50 text-green-700 border-transparent'
+                  ? 'bg-rose-500 text-white border-rose-500'
+                  : 'bg-white text-rose-500 border-rose-200'
               }`}
             >
               {a}
@@ -77,12 +79,11 @@ export default function Home() {
           ))}
         </div>
 
-        {/* リスト/マップ切り替え */}
-        <div className="flex rounded-xl overflow-hidden border border-gray-200 mt-4">
+        <div className="flex rounded-xl overflow-hidden border border-rose-100 mt-4 shadow-sm">
           <button
             onClick={() => setView('list')}
             className={`flex-1 py-2 text-sm font-semibold transition ${
-              view === 'list' ? 'bg-green-700 text-white' : 'bg-white text-gray-500'
+              view === 'list' ? 'bg-rose-500 text-white' : 'bg-white text-gray-500'
             }`}
           >
             📋 一覧
@@ -90,7 +91,7 @@ export default function Home() {
           <button
             onClick={() => setView('map')}
             className={`flex-1 py-2 text-sm font-semibold transition ${
-              view === 'map' ? 'bg-green-700 text-white' : 'bg-white text-gray-500'
+              view === 'map' ? 'bg-rose-500 text-white' : 'bg-white text-gray-500'
             }`}
           >
             🗺 マップ
@@ -100,7 +101,7 @@ export default function Home() {
 
       {view === 'map' ? (
         <div className="max-w-xl mx-auto px-4 pb-16">
-          <div style={{ height: '60vh' }} className="rounded-xl overflow-hidden border border-gray-200">
+          <div style={{ height: '60vh' }} className="rounded-xl overflow-hidden border border-rose-100 shadow-sm">
             {loading ? (
               <div className="flex items-center justify-center h-full text-gray-400 text-sm">読み込み中...</div>
             ) : (
@@ -118,7 +119,7 @@ export default function Home() {
           ) : (
             filtered.map(shop => (
               <Link key={shop.id} href={`/shops/${shop.id}`}>
-                <div className="bg-white border border-gray-200 rounded-xl mb-3 hover:shadow-md transition overflow-hidden">
+                <div className="bg-white border border-rose-100 rounded-xl mb-3 hover:shadow-md transition overflow-hidden">
                   {shop.image_url && (
                     <img
                       src={shop.image_url}
@@ -135,7 +136,7 @@ export default function Home() {
                         <span className={`text-xs px-2 py-0.5 rounded font-semibold ${
                           shop.access_type === '公共交通OK' ? 'bg-blue-100 text-blue-700' :
                           shop.access_type === '車推奨' ? 'bg-orange-100 text-orange-700' :
-                          'bg-green-100 text-green-700'
+                          'bg-rose-100 text-rose-600'
                         }`}>
                           {shop.access_type}
                         </span>
